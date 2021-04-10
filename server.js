@@ -11,7 +11,9 @@ connectDB();
 
 const app = express();
 
-app.use(express.json());
+const dashboard = require("./routes/dashboard");
+
+app.use("/api/v1/dashboard", dashboard);
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
@@ -23,3 +25,5 @@ app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
 );
+
+module.exports = app;
