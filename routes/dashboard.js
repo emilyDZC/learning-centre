@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getSubjects } = require("../controllers/dashboardController");
+const {
+  getSubjects,
+  addSubject,
+} = require("../controllers/dashboardController");
 
-router.route("/").get(getSubjects);
+router.route("/").get(getSubjects).post(addSubject);
 
 module.exports = router;

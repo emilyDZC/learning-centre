@@ -9,15 +9,17 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
-const app = express();
-
 const dashboard = require("./routes/dashboard");
 
-app.use("/api/v1/dashboard", dashboard);
+const app = express();
+
+app.use(express.json());
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+app.use("/api/v1/dashboard", dashboard);
 
 const PORT = process.env.PORT || 5000;
 
