@@ -1,10 +1,16 @@
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Dashboard from "./dashboard/Dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Learning Log</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
