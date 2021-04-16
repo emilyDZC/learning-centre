@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
-// import axios from "axios";
+import axios from "axios";
 
 const initialState = {
   subjects: [],
@@ -14,7 +14,7 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  // Actions: posts
+  // Actions: subjects
   async function getSubjects() {
     try {
       const res = await axios.get("/api/v1/subjects");
@@ -31,13 +31,32 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  // Actions: posts
+  async function getPosts() {
+    try {
+      const res = await axios.get("/api/v1/posts");
+
+      dispatch({
+        type: "GET_POSTS",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         error: state.error,
         loading: state.loading,
         subjects: state.subjects,
+        posts: state.posts,
         getSubjects,
+        getPosts,
       }}
     >
       {children}

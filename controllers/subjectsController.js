@@ -11,7 +11,7 @@ module.exports.getSubjects = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       count: subjects.length,
-      subjects: subjects,
+      data: subjects,
     });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });

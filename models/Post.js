@@ -6,6 +6,10 @@ const PostSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please add a title"],
   },
+  body: {
+    type: String,
+    trim: true,
+  },
   tags: {
     type: Array,
   },

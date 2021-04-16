@@ -3,7 +3,7 @@ const router = express.Router();
 const {
   getSubjects,
   addSubject,
-} = require("../controllers/dashboardController");
+} = require("../controllers/subjectsController");
 
 router.route("/").get(getSubjects).post(addSubject);
 

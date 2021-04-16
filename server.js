@@ -9,7 +9,8 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
-const dashboard = require("./routes/dashboard");
+const subjects = require("./routes/dashboard");
+const posts = require("./routes/posts");
 
 const app = express();
 
@@ -19,7 +20,8 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use("/api/v1/dashboard", dashboard);
+app.use("/api/v1/subjects", subjects);
+app.use("/api/v1/posts", posts);
 
 const PORT = process.env.PORT || 5000;
 

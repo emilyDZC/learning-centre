@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Widget = ({ title }) => {
+const Widget = ({ name, id }) => {
   return (
     <Link to="/posts">
       <div className="widget">
-        <div className="widget-heading">{title}</div>
+        <div className="widget-heading">{name}</div>
       </div>
     </Link>
   );

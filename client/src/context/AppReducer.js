@@ -38,6 +38,30 @@ export default (state, action) => {
         ...state,
         error: action.payload,
       };
+    case "GET_POSTS":
+      return {
+        ...state,
+        loading: false,
+        posts: action.payload,
+      };
+    case "DELETE_POST":
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case "ADD_POST":
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+      };
+    case "UPDATE_POST":
+      return {
+        ...state,
+        posts: [
+          action.payload,
+          ...state.posts.filter((post) => post._id !== action.payload._id),
+        ],
+      };
     default:
       return state;
   }
