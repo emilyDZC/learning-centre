@@ -9,7 +9,7 @@ dotenv.config({ path: "./config/config.env" });
 
 connectDB();
 
-const subjects = require("./routes/dashboard");
+const subjects = require("./routes/subjects");
 const posts = require("./routes/posts");
 
 const app = express();

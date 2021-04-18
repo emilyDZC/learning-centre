@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   return (
     <div className="App">
-      <h1>Learning Log</h1>
+      <h1>Learning Centre</h1>
       <button>Add new post</button>
       <div className="widgets-container">
         {subjects &&
