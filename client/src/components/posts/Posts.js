@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
 
-const Posts = () => {
+const Posts = (props) => {
   const { posts, getPosts } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -10,11 +10,11 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="App">
-      <h1>Posts</h1>
+    <div>
+      <h4>Posts</h4>
       {posts &&
         posts
-          // .filter((post) => post.subject === subject)
+          .filter((post) => post.subject === props.id)
           .map((post, i) => {
             return (
               <p key={i}>

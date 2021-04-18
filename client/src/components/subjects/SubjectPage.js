@@ -1,8 +1,15 @@
 import React from "react";
-import { useHistory, useParams } from "react-router-dom";
+import Posts from "../posts/Posts";
+import { useParams } from "react-router-dom";
 
-const SubjectPage = (props) => {
-  return <div></div>;
+const SubjectPage = () => {
+  const { id, name } = useParams();
+  return (
+    <div className="App">
+      <h1>{name}</h1>
+      <Posts id={id} />
+    </div>
+  );
 };
 
 export default SubjectPage;

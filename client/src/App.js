@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/posts">
             <Posts />
           </Route>
-          <Route path="/subjects/:subjectId">
+          <Route path="/subjects/:id/:name">
             <SubjectPage />
           </Route>
         </Switch>

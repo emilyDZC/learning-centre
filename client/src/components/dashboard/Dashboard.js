@@ -10,8 +10,6 @@ const Dashboard = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(subjects);
-
   return (
     <div className="App">
       <h1>Learning Centre</h1>
