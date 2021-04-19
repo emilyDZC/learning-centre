@@ -108,6 +108,8 @@ a {
 .post-body {
   white-space: pre-line;
   text-align: left;
+  max-height: 200px;
+  overflow: scroll;
 }
 
 .post-container {

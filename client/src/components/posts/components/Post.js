@@ -1,4 +1,5 @@
 import React from "react";
+import ReactMarkdown from "react-markdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,7 +8,7 @@ const Post = ({ id, title, body, tags, date, subject }) => {
     <div className="post-container">
       <h3>{title}</h3>
       <p className="post-date">{date}</p>
-      <p className="post-body">{body}</p>
+      <ReactMarkdown className="post-body">{body}</ReactMarkdown>
       {/* <button onClick={() => confirmDelete(id)}>
             <FontAwesomeIcon icon={faTrash} />
           </button>
