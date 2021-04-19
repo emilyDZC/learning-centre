@@ -1,3 +1,23 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+}
+
+#root {
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -26,4 +46,77 @@
 .widget-heading {
   font-size: 30px;
   font-weight: 700;
+}
+
+.add-post-container {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+label {
+  display: flex;
+  margin: 10px 0;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  border: 1px solid #dedede;
+  border-radius: 2px;
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  font-family: "Lato", sans-serif;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #4d9eb3;
+  box-shadow: var(--box-shadow);
+  border-radius: 0.15rem;
+  color: #fff;
+  border: 0;
+  display: block;
+  font-size: 16px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: fit-content;
+}
+
+/* FA icon margin on addButton */
+svg:not(:root).svg-inline--fa {
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+/* Post */
+.post-date {
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.post-source {
+  font-size: 0.8rem;
+}
+
+.post-body {
+  white-space: pre-line;
+  text-align: left;
+}
+
+.post-container {
+  margin-bottom: 50px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid grey;
+}
+
+.posts-container {
+  max-width: 50%;
+  margin: 0 auto 30px;
 }

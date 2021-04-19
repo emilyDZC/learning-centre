@@ -26,12 +26,12 @@ const AddPost = ({ setShowAddPost }) => {
     };
 
     addPost(newPost);
-    // setShowAddPost(false);
+    setShowAddPost(false);
   };
 
   return (
-    <div>
-      <h3>Add new post</h3>
+    <div className="add-post-container">
+      <h3>New post</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">
           <label htmlFor="text">Title</label>

@@ -1,5 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { GlobalContext } from "../../context/GlobalState";
+import Post from "./components/Post";
+import moment from "moment";
 
 const Posts = (props) => {
   const { posts, getPosts } = useContext(GlobalContext);
@@ -10,16 +12,22 @@ const Posts = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="posts-container">
       <h4>Posts</h4>
       {posts &&
         posts
           .filter((post) => post.subject === props.id)
           .map((post, i) => {
             return (
-              <p key={i}>
-                {post.title}: {post.body}
-              </p>
+              <Post
+                title={post.title}
+                body={post.body}
+                date={moment(post.createdAt).format("Do MMMM YYYY, h:mm a")}
+                tags={post.tags}
+                subject={post.subject}
+                id={post._id}
+                key={i}
+              />
             );
           })}
     </div>
