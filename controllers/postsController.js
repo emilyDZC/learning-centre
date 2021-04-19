@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const Subject = require("../models/Subject");
 
 // @desc    Get all posts
 // @route   GET /api/v1/posts
@@ -24,11 +25,27 @@ exports.getPosts = async (req, res, next) => {
 
 exports.addPost = async (req, res, next) => {
   try {
-    const { title, body, topic, tags, source } = req.body;
+    const subject = await Subject.find({ name: req.body.subject }).limit(1);
+    const subjectId = subject[0]._id;
 
-    const post = await Post.create(req.body);
+    const { title, body, tags, links, subTopic } = req.body;
 
-    return res.status(201).json({ success: true, data: post });
+    const post = await Post.create({
+      title,
+      body,
+      tags,
+      links,
+      subject: subjectId,
+      subTopic,
+    });
+    await post.save();
+
+    subject[0].posts.push(post._id);
+    await subject[0].save();
+
+    return res
+      .status(201)
+      .json({ success: true, data: post, subject: subject[0] });
   } catch (error) {
     if (error.name === "ValidationError") {
       const messages = Object.values(error.errors).map((val) => val.message);

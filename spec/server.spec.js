@@ -80,4 +80,49 @@ describe("endpoints", () => {
       });
     });
   });
+  describe("/api/v1/posts", () => {
+    describe("POST", () => {
+      it("Status 201: should successfully create post", () => {
+        return request(app)
+          .post("/api/v1/posts")
+          .send({
+            title: "Monday Learning",
+            body: "Testing post requests",
+            subject: "Psychology",
+          })
+          .expect(201);
+      });
+      it("Returns the correct data", () => {
+        return request(app)
+          .post("/api/v1/posts")
+          .send({
+            title: "Tuesday Learning",
+            body: "Testing post requests",
+            subject: "Psychology",
+          })
+          .expect(201)
+          .then(({ body }) => {
+            expect(body.data).to.be.an("object");
+            expect(body.data.title).to.equal("Tuesday Learning");
+            expect(body.data.body).to.equal("Testing post requests");
+          });
+      });
+      it("Links post to subject", async () => {
+        const subject = await Subject.find({ name: "Psychology" });
+        const subjectId = subject[0]._id;
+        return request(app)
+          .post("/api/v1/posts")
+          .send({
+            title: "Wednesday Learning",
+            body: "Testing post requests",
+            subject: "Psychology",
+          })
+          .expect(201)
+          .then(({ body }) => {
+            expect(body.data.subject).to.equal(subjectId.toString());
+            expect(body.subject.posts).to.include(body.data._id.toString());
+          });
+      });
+    });
+  });
 });

@@ -48,6 +48,27 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function addPost(post) {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/v1/posts", post, config);
+
+      dispatch({
+        type: "ADD_POST",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -57,6 +78,7 @@ export const GlobalProvider = ({ children }) => {
         posts: state.posts,
         getSubjects,
         getPosts,
+        addPost,
       }}
     >
       {children}
