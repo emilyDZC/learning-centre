@@ -11,6 +11,7 @@ connectDB();
 
 const subjects = require("./routes/subjects");
 const posts = require("./routes/posts");
+const projects = require("./routes/projects");
 
 const app = express();
 
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use("/api/v1/subjects", subjects);
 app.use("/api/v1/posts", posts);
+app.use("/api/v1/projects", projects);
 
 const PORT = process.env.PORT || 5000;
 

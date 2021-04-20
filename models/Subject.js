@@ -6,6 +6,9 @@ const SubjectSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please add a name"],
   },
+  links: {
+    type: Array,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -20,6 +23,12 @@ const SubjectSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
+    },
+  ],
+  projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Project",
     },
   ],
 });

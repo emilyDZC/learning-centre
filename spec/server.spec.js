@@ -6,6 +6,7 @@ const app = require("../server");
 const request = require("supertest");
 const connectDB = require("../config/db");
 const Subject = require("../models/Subject");
+const Project = require("../models/Project");
 
 connectDB();
 
@@ -63,6 +64,8 @@ describe("endpoints", () => {
               "_id",
               "name",
               "createdAt",
+              "links",
+              "projects",
               "__v",
             ]);
           });
@@ -121,6 +124,51 @@ describe("endpoints", () => {
           .then(({ body }) => {
             expect(body.data.subject).to.equal(subjectId.toString());
             expect(body.subject.posts).to.include(body.data._id.toString());
+          });
+      });
+    });
+  });
+  describe("/api/v1/projects", () => {
+    describe("POST", () => {
+      it("Status 201: should successfully create project", () => {
+        return request(app)
+          .post("/api/v1/projects")
+          .send({
+            title: "Psychology Project",
+            description: "Investigating behaviour",
+            subject: "Psychology",
+          })
+          .expect(201);
+      });
+      it("Returns the correct data", () => {
+        return request(app)
+          .post("/api/v1/projects")
+          .send({
+            title: "Psychology Project 2",
+            description: "Investigating behaviour",
+            subject: "Psychology",
+          })
+          .expect(201)
+          .then(({ body }) => {
+            expect(body.data).to.be.an("object");
+            expect(body.data.title).to.equal("Psychology Project 2");
+            expect(body.data.description).to.equal("Investigating behaviour");
+          });
+      });
+      it("Links project to subject", async () => {
+        const subject = await Subject.find({ name: "Psychology" });
+        const subjectId = subject[0]._id;
+        return request(app)
+          .post("/api/v1/projects")
+          .send({
+            title: "Psychology Project 3",
+            description: "Investigating behaviour",
+            subject: "Psychology",
+          })
+          .expect(201)
+          .then(({ body }) => {
+            expect(body.data.subject).to.equal(subjectId.toString());
+            expect(body.subject.projects).to.include(body.data._id.toString());
           });
       });
     });
