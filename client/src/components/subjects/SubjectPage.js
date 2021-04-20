@@ -12,19 +12,36 @@ const SubjectPage = () => {
   const [showAddPost, setShowAddPost] = useState(false);
 
   return (
-    <div className="App">
-      <Link to="/">
-        <FontAwesomeIcon icon={faArrowLeft} className="back-arrow" />
-      </Link>
-      <h1>{name}</h1>
-      <button
-        className="btn"
-        onClick={() => setShowAddPost((current) => !current)}
-      >
-        {showAddPost ? "Hide" : <AddButton text="Add New Post" />}
-      </button>
-      {showAddPost && <AddPost setShowAddPost={setShowAddPost} />}
-      <Posts id={id} />
+    <div className="subject-page">
+      <div className="subject-left">
+        <h2>Learning Points</h2>
+        <li>Testing framework: unittest</li>
+      </div>
+      <div className="subject-middle">
+        <Link to="/">
+          Back
+          {/* <FontAwesomeIcon icon={faArrowLeft} className="back-arrow" /> */}
+        </Link>
+        <h1>{name}</h1>
+        <div>
+          Summary of this subject, what I'm learning and the projects I've made.
+        </div>
+        <div className="notes-container-box">
+          <h2>My {name} Notes</h2>
+          <button
+            className="btn subject-page-add-button"
+            onClick={() => setShowAddPost((current) => !current)}
+          >
+            {showAddPost ? "Hide" : <AddButton text="Add New Post" />}
+          </button>
+          {showAddPost && <AddPost setShowAddPost={setShowAddPost} />}
+          <Posts id={id} />
+        </div>
+      </div>
+      <div className="subject-right">
+        <h2>Projects</h2>
+        <li>Python katas: https://github.com/emilyDZC/python-katas</li>
+      </div>
     </div>
   );
 };

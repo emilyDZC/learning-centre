@@ -6,8 +6,10 @@ import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 const Post = ({ id, title, body, tags, date, subject }) => {
   return (
     <div className="post-container">
-      <h3>{title}</h3>
-      <p className="post-date">{date}</p>
+      <div className="post-header">
+        <p className="post-date">{date}</p>
+        <p className="post-title">{title}</p>
+      </div>
       <ReactMarkdown className="post-body">{body}</ReactMarkdown>
       {/* <button onClick={() => confirmDelete(id)}>
             <FontAwesomeIcon icon={faTrash} />
