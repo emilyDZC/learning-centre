@@ -13,7 +13,6 @@ const Posts = (props) => {
 
   return (
     <div className="posts-container">
-      <h4>Posts</h4>
       {posts &&
         posts
           .filter((post) => post.subject === props.id)

@@ -110,6 +110,9 @@ a {
   text-align: left;
   max-height: 200px;
   overflow: scroll;
+  background-color: #fff;
+  padding-left: 3px;
+  padding-right: 3px;
 }
 
 .post-container {
@@ -121,4 +124,11 @@ a {
 .posts-container {
   max-width: 50%;
   margin: 0 auto 30px;
+}
+
+.back-arrow {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  font-size: 20px;
 }

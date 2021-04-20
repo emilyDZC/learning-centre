@@ -5,7 +5,7 @@ import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
 
 const Dashboard = () => {
-  const { subjects, getSubjects, addPost } = useContext(GlobalContext);
+  const { subjects, getSubjects } = useContext(GlobalContext);
   const [showAddPost, setShowAddPost] = useState(false);
 
   useEffect(() => {
