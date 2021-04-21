@@ -13,9 +13,6 @@ function App() {
           <Route exact path="/">
             <Dashboard />
           </Route>
-          <Route exact path="/posts">
-            <Posts />
-          </Route>
           <Route path="/subjects/:id/:name">
             <SubjectPage />
           </Route>

@@ -1,8 +1,13 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
 
-const AddPost = ({ setShowAddPost }) => {
-  const { addPost } = useContext(GlobalContext);
+const AddPost = ({ setShowAddPost, subjectName }) => {
+  const { addPost, subjects, getSubjects } = useContext(GlobalContext);
+
+  useEffect(() => {
+    getSubjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // const { title, body, tags, links, subject, subTopic } = req.body;
 
@@ -11,7 +16,6 @@ const AddPost = ({ setShowAddPost }) => {
   const [tags, setTags] = useState();
   const [links, setLinks] = useState();
   const [subject, setSubject] = useState();
-  const [subTopic, setSubTopic] = useState();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +26,6 @@ const AddPost = ({ setShowAddPost }) => {
       tags,
       links,
       subject,
-      subTopic,
     };
 
     addPost(newPost);
@@ -51,20 +54,20 @@ const AddPost = ({ setShowAddPost }) => {
         </div>
         <div className="form-control">
           <label htmlFor="text">Subject</label>
-          <input
-            type="text"
-            placeholder="Enter topic..."
-            onChange={(e) => setSubject(e.target.value)}
-          />
+          <select name="subject" onChange={(e) => setSubject(e.target.value)}>
+            {subjects.map((subject, i) => {
+              return <option value={subject.name}>{subject.name}</option>;
+            })}
+          </select>
         </div>
-        <div className="form-control">
+        {/* <div className="form-control">
           <label htmlFor="text">Sub-Topic</label>
           <input
             type="text"
             placeholder="Enter source..."
             onChange={(e) => setSubTopic(e.target.value)}
           />
-        </div>
+        </div> */}
         <div className="form-control">
           <label htmlFor="text">Tags</label>
           <input

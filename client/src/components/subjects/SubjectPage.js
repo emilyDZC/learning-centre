@@ -32,9 +32,11 @@ const SubjectPage = () => {
             className="btn subject-page-add-button"
             onClick={() => setShowAddPost((current) => !current)}
           >
-            {showAddPost ? "Hide" : <AddButton text="Add New Post" />}
+            {showAddPost ? "Cancel" : <AddButton text="Add New Post" />}
           </button>
-          {showAddPost && <AddPost setShowAddPost={setShowAddPost} />}
+          {showAddPost && (
+            <AddPost setShowAddPost={setShowAddPost} subject={name} />
+          )}
           <Posts id={id} />
         </div>
       </div>

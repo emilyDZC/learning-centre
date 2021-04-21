@@ -6,6 +6,9 @@ const SubjectSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Please add a name"],
   },
+  summary: {
+    type: String,
+  },
   links: {
     type: Array,
   },

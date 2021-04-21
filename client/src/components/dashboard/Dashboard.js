@@ -20,9 +20,13 @@ const Dashboard = () => {
         className="btn"
         onClick={() => setShowAddPost((current) => !current)}
       >
-        {showAddPost ? "Hide" : <AddButton text="Add New Post" />}
+        {showAddPost ? "Cancel" : <AddButton text="Add New Post" />}
       </button>
-      {showAddPost && <AddPost setShowAddPost={setShowAddPost} />}
+      {showAddPost && (
+        <div className="dashboard-form-container">
+          <AddPost setShowAddPost={setShowAddPost} />
+        </div>
+      )}
       <div className="widgets-container">
         {subjects &&
           subjects.map((subj, i) => {
