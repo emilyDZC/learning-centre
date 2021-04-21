@@ -69,6 +69,43 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function deletePost(id) {
+    try {
+      await axios.delete(`/api/v1/posts/${id}`);
+
+      dispatch({
+        type: "DELETE_POST",
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  async function updatePost(post) {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.patch(`/api/v1/posts/${post.id}`, post, config);
+
+      dispatch({
+        type: "UPDATE_POST",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -79,6 +116,8 @@ export const GlobalProvider = ({ children }) => {
         getSubjects,
         getPosts,
         addPost,
+        deletePost,
+        updatePost,
       }}
     >
       {children}

@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { GlobalContext } from "../../../context/GlobalState";
+import FormInput from "../../shared/FormInput";
 
 const AddPost = ({ setShowAddPost, subjectName }) => {
   const { addPost, subjects, getSubjects } = useContext(GlobalContext);
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     getSubjects();
@@ -36,14 +38,7 @@ const AddPost = ({ setShowAddPost, subjectName }) => {
     <div className="add-post-container">
       <h3>New post</h3>
       <form onSubmit={onSubmit}>
-        <div className="form-control">
-          <label htmlFor="text">Title</label>
-          <input
-            type="text"
-            placeholder="Enter title..."
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
+        <FormInput title="Title" placeholder="Enter title..." func={setTitle} />
         <div className="form-control">
           <label htmlFor="textarea">Text</label>
           <textarea
@@ -60,14 +55,6 @@ const AddPost = ({ setShowAddPost, subjectName }) => {
             })}
           </select>
         </div>
-        {/* <div className="form-control">
-          <label htmlFor="text">Sub-Topic</label>
-          <input
-            type="text"
-            placeholder="Enter source..."
-            onChange={(e) => setSubTopic(e.target.value)}
-          />
-        </div> */}
         <div className="form-control">
           <label htmlFor="text">Tags</label>
           <input

@@ -92,6 +92,10 @@ textarea {
   width: fit-content;
 }
 
+.btn-cancel {
+  background-color: brown;
+}
+
 .subject-page-add-button {
   position: absolute;
   right: 10px;
