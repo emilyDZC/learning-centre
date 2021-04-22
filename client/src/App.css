@@ -195,7 +195,7 @@ a {
 }
 
 .subject-left {
-  text-align: center;
+  text-align: left;
   padding: 30px;
   flex-grow: 1;
   background-color: #99b3b9;

@@ -12,6 +12,9 @@ const SubjectSchema = new mongoose.Schema({
   links: {
     type: Array,
   },
+  keywords: {
+    type: Array,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
