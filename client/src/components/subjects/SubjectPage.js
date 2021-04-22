@@ -23,7 +23,8 @@ const SubjectPage = () => {
     <div className="subject-page">
       <div className="subject-left">
         <h2>Keywords</h2>
-        {subject.keywords &&
+        {subject &&
+          subject.keywords.length > 0 &&
           subject.keywords.map((keyword, i) => {
             return (
               <li>
@@ -36,9 +37,7 @@ const SubjectPage = () => {
       <div className="subject-middle">
         <Link to="/">Back</Link>
         <h1>{name}</h1>
-        <div>
-          Summary of this subject, what I'm learning and the projects I've made.
-        </div>
+        <div>{subject && subject.summary && subject.summary}</div>
         <div className="notes-container-box">
           <h2>My {name} Notes</h2>
           <button
