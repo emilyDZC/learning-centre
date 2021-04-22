@@ -57,14 +57,16 @@ const Post = ({ id, title, body, tags, date, subject }) => {
           <div className="post-header">
             <p className="post-date">{date}</p>
             <p className="post-title">{title}</p>
+            <div className="icons-container">
+              <button onClick={() => confirmDelete(id)}>
+                <FontAwesomeIcon icon={faTrash} className="trash-icon" />
+              </button>
+              <button onClick={() => editPost()}>
+                <FontAwesomeIcon icon={faPencilAlt} className="pencil-icon" />
+              </button>
+            </div>
           </div>
           <ReactMarkdown className="post-body">{body}</ReactMarkdown>
-          <button onClick={() => confirmDelete(id)}>
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-          <button onClick={() => editPost()}>
-            <FontAwesomeIcon icon={faPencilAlt} />
-          </button>
         </div>
       )}
     </>

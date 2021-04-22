@@ -104,7 +104,7 @@ textarea {
 
 /* FA icon margin on addButton */
 svg:not(:root).svg-inline--fa {
-  margin-right: 10px;
+  /* margin-right: 10px; */
 }
 
 a {
@@ -116,7 +116,9 @@ a {
 .post-header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: baseline;
+  width: 100%;
 }
 
 .post-date {
@@ -152,6 +154,31 @@ a {
 
 .posts-container {
   /* margin: 0 auto 30px; */
+}
+
+.icons-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+}
+
+.icons-container .trash-icon,
+.pencil-icon {
+  font-size: 15px;
+  margin-left: 1px;
+}
+
+.icons-container button {
+  padding: 4px;
+  display: block;
+  font-size: 12px;
+  margin: 10px auto 30px;
+  padding: 10px;
+  width: fit-content;
+  cursor: pointer;
+  border: 1px solid rgb(192, 191, 191);
+  box-shadow: var(--box-shadow);
+  border-radius: 0.15rem;
 }
 
 .back-arrow {
