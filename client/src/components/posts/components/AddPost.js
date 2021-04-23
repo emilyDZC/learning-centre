@@ -49,7 +49,11 @@ const AddPost = ({ setShowAddPost, subjectName }) => {
         </div>
         <div className="form-control">
           <label htmlFor="text">Subject</label>
-          <select name="subject" onChange={(e) => setSubject(e.target.value)}>
+          <select
+            name="subject"
+            value={subjectName || subjects[0]}
+            onChange={(e) => setSubject(e.target.value)}
+          >
             {subjects.map((subject, i) => {
               return <option value={subject.name}>{subject.name}</option>;
             })}
