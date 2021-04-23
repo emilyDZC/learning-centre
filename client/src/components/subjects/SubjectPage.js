@@ -14,7 +14,6 @@ const SubjectPage = () => {
 
   useEffect(() => {
     getSubjects();
-    console.log(subjects);
     setSubject(subjects.filter((subj) => subj._id === id)[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -47,7 +46,7 @@ const SubjectPage = () => {
             {showAddPost ? "Cancel" : <AddButton text="Add New Post" />}
           </button>
           {showAddPost && (
-            <AddPost setShowAddPost={setShowAddPost} subject={name} />
+            <AddPost setShowAddPost={setShowAddPost} subjectName={name} />
           )}
           <Posts id={id} />
         </div>
