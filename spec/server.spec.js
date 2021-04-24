@@ -7,6 +7,7 @@ const request = require("supertest");
 const connectDB = require("../config/db");
 const Subject = require("../models/Subject");
 const Project = require("../models/Project");
+const Post = require("../models/Post");
 
 connectDB();
 
@@ -64,6 +65,7 @@ describe("endpoints", () => {
               "_id",
               "name",
               "createdAt",
+              "keywords",
               "links",
               "projects",
               "__v",
@@ -124,6 +126,26 @@ describe("endpoints", () => {
           .then(({ body }) => {
             expect(body.data.subject).to.equal(subjectId.toString());
             expect(body.subject.posts).to.include(body.data._id.toString());
+          });
+      });
+    });
+    describe("PATCH", () => {
+      it("Status 200: should successfully update post", async () => {
+        const subject = await Subject.find({ name: "Psychology" });
+        const subjectId = subject[0]._id;
+        const post = await Post.create({
+          title: "Post One",
+          body: "Some text",
+          subject: subjectId,
+        });
+        return request(app)
+          .patch(`/api/v1/posts/${post._id}`)
+          .send({
+            body: "Altered text",
+          })
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.data.body).to.equal("Altered text");
           });
       });
     });

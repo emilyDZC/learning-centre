@@ -86,14 +86,13 @@ exports.deletePost = async (req, res, next) => {
 exports.updatePost = async (req, res, next) => {
   try {
     let post = await Post.findById(req.params.id);
-    console.log(req.params.id);
 
     if (!post) {
       return res.status(404).json({ success: false, error: "No post found" });
     }
 
     post.set(req.body).save();
-    return res.status(201).json({ success: true, data: post });
+    return res.status(200).json({ success: true, data: post });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
   }
