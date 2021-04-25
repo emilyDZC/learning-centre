@@ -31,6 +31,32 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  async function updateSubject(subject) {
+    console.log("in reducer: ", subject);
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.patch(
+        `/api/v1/subjects/${subject.id}`,
+        subject,
+        config
+      );
+
+      dispatch({
+        type: "UPDATE_SUBJECT",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   // Actions: posts
   async function getPosts() {
     try {
@@ -114,6 +140,7 @@ export const GlobalProvider = ({ children }) => {
         subjects: state.subjects,
         posts: state.posts,
         getSubjects,
+        updateSubject,
         getPosts,
         addPost,
         deletePost,

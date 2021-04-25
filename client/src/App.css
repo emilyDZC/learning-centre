@@ -232,3 +232,19 @@ a {
   margin-top: 50px;
   position: relative;
 }
+
+.keyword-input {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.check-icon {
+  background-color: rgb(57, 165, 57);
+  color: white;
+  font-size: 20px;
+  padding: 2px;
+  cursor: pointer;
+  margin-left: 7px;
+}

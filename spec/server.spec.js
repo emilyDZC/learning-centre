@@ -84,6 +84,23 @@ describe("endpoints", () => {
           });
       });
     });
+    describe("PATCH", () => {
+      it("Status 200: should successfully update subject", async () => {
+        const subject = await Subject.find({ name: "Psychology" });
+        const subjectId = subject[0]._id;
+        const patchText =
+          "Core conditions for counselling: empathy, congruence and unconditional positive regard";
+        return request(app)
+          .patch(`/api/v1/subjects/${subjectId}`)
+          .send({
+            keywords: [patchText],
+          })
+          .expect(200)
+          .then(({ body }) => {
+            expect(body.data.keywords[0]).to.equal(patchText);
+          });
+      });
+    });
   });
   describe("/api/v1/posts", () => {
     describe("POST", () => {

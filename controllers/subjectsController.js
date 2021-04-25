@@ -77,7 +77,7 @@ module.exports.updateSubject = async (req, res, next) => {
     }
 
     subject.set(req.body).save();
-    return res.status(201).json({ success: true, data: subject });
+    return res.status(200).json({ success: true, data: subject });
   } catch (error) {
     return res.status(500).json({ success: false, error: error.message });
   }

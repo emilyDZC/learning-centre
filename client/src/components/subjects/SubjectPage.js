@@ -5,12 +5,16 @@ import { Link } from "react-router-dom";
 import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
 import { GlobalContext } from "../../context/GlobalState";
+import FormInput from "../shared/FormInput";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const SubjectPage = () => {
   const { id, name } = useParams();
   const [showAddPost, setShowAddPost] = useState(false);
-  const { subjects, getSubjects } = useContext(GlobalContext);
+  const { subjects, getSubjects, updateSubject } = useContext(GlobalContext);
   const [subject, setSubject] = useState();
+  const [keyword, setKeyword] = useState();
 
   useEffect(() => {
     getSubjects();
@@ -18,10 +22,31 @@ const SubjectPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onSubmit = () => {
+    const updatedSubject = {
+      id: subject._id,
+      keywords: [...subject.keywords, keyword],
+    };
+
+    updateSubject(updatedSubject);
+  };
+
   return (
     <div className="subject-page">
       <div className="subject-left">
         <h2>Keywords</h2>
+        <div className="keyword-input">
+          <FormInput
+            title=""
+            placeholder="Add new keyword..."
+            func={setKeyword}
+          />
+          <FontAwesomeIcon
+            icon={faCheck}
+            className="check-icon"
+            onClick={() => onSubmit()}
+          />
+        </div>
         {subject &&
           subject.keywords.length > 0 &&
           subject.keywords.map((keyword, i) => {
