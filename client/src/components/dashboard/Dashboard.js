@@ -34,7 +34,10 @@ const Dashboard = () => {
       </button>
       {showAddPost && (
         <div className="dashboard-form-container">
-          <AddPost setShowAddPost={setShowAddPost} />
+          <AddPost
+            setShowAddPost={setShowAddPost}
+            subjectName={subjects[0].name}
+          />
         </div>
       )}
       <div className="widgets-container">

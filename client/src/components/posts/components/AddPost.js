@@ -17,7 +17,7 @@ const AddPost = ({ setShowAddPost, subjectName }) => {
   const [body, setBody] = useState();
   const [tags, setTags] = useState();
   const [links, setLinks] = useState();
-  const [subject, setSubject] = useState();
+  const [subject, setSubject] = useState(subjectName);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const AddPost = ({ setShowAddPost, subjectName }) => {
           <label htmlFor="text">Subject</label>
           <select
             name="subject"
-            value={subjectName || subjects[0]}
+            value={subject}
             onChange={(e) => setSubject(e.target.value)}
           >
             {subjects.map((subject, i) => {
