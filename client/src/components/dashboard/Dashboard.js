@@ -4,10 +4,13 @@ import { GlobalContext } from "../../context/GlobalState";
 import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
 import Title from "./components/Title";
+import AddSubject from "./components/AddSubject";
 
 const Dashboard = () => {
-  const { subjects, getSubjects } = useContext(GlobalContext);
+  const { subjects, getSubjects, addSubject } = useContext(GlobalContext);
   const [showAddPost, setShowAddPost] = useState(false);
+  const [showAddSubject, setShowAddSubject] = useState(false);
+  const [subjectName, setSubjectName] = useState("");
 
   useEffect(() => {
     getSubjects();
@@ -20,8 +23,19 @@ const Dashboard = () => {
     "#2896b8", // cgblue
     "#D0F4DE", // aero blue (pastel green)
     "#6D9DC5", // cerulean forest
+    "#B6A6CA", // lilac
     "#A9DEF9", // uranian blue
+    "#D5CFE1", // languid lavender
   ];
+
+  const handleAddSubject = () => {
+    const newSubject = {
+      name: subjectName,
+    };
+
+    addSubject(newSubject);
+    setShowAddSubject(false);
+  };
 
   return (
     <div className="App">
@@ -52,6 +66,21 @@ const Dashboard = () => {
               />
             );
           })}
+        <div
+          className="widget"
+          style={{ cursor: "pointer" }}
+          onClick={() => (showAddSubject ? "" : setShowAddSubject(true))}
+        >
+          {!showAddSubject && <div className="widget-heading-plus">+</div>}
+          {showAddSubject && (
+            <AddSubject
+              setSubjectName={setSubjectName}
+              subjectName={subjectName}
+              handleAddSubject={handleAddSubject}
+              setShowAddSubject={setShowAddSubject}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
