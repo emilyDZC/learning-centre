@@ -5,6 +5,7 @@ import axios from "axios";
 const initialState = {
   subjects: [],
   posts: [],
+  projects: [],
 };
 
 // Create context
@@ -152,6 +153,85 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
+  // Actions: projects
+  async function getProjects() {
+    try {
+      const res = await axios.get("/api/v1/projects");
+
+      dispatch({
+        type: "GET_PROJECTS",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  async function addProject(project) {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/v1/projects", project, config);
+
+      dispatch({
+        type: "ADD_PROJECT",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  async function updateProject(project) {
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.patch(
+        `/api/v1/projects/${project.id}`,
+        project,
+        config
+      );
+
+      dispatch({
+        type: "UPDATE_PROJECT",
+        payload: res.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
+  async function deleteProject(id) {
+    try {
+      await axios.delete(`/api/v1/projects/${id}`);
+
+      dispatch({
+        type: "DELETE_PROJECT",
+        payload: id,
+      });
+    } catch (error) {
+      dispatch({
+        type: "POST_ERROR",
+        payload: error.response.data.error,
+      });
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -159,6 +239,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         subjects: state.subjects,
         posts: state.posts,
+        projects: state.projects,
         getSubjects,
         updateSubject,
         addSubject,
@@ -166,6 +247,10 @@ export const GlobalProvider = ({ children }) => {
         addPost,
         deletePost,
         updatePost,
+        addProject,
+        getProjects,
+        updateProject,
+        deleteProject,
       }}
     >
       {children}

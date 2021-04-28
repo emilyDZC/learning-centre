@@ -24,6 +24,7 @@ exports.getProjects = async (req, res, next) => {
 // @access  Public
 
 exports.addProject = async (req, res, next) => {
+  console.log(req.body);
   try {
     const subject = await Subject.find({ name: req.body.subject }).limit(1);
     const subjectId = subject[0]._id;

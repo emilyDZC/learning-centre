@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
+import AddProject from "./components/AddProject";
 import { GlobalContext } from "../../context/GlobalState";
 import FormInput from "../shared/FormInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,13 +13,28 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const SubjectPage = () => {
   const { id, name } = useParams();
   const [showAddPost, setShowAddPost] = useState(false);
-  const { subjects, getSubjects, updateSubject } = useContext(GlobalContext);
+  const [showAddProject, setShowAddProject] = useState(false);
+  const {
+    subjects,
+    getSubjects,
+    updateSubject,
+    projects,
+    getProjects,
+  } = useContext(GlobalContext);
   const [subject, setSubject] = useState();
   const [keyword, setKeyword] = useState();
+  const [projectTitle, setProjectTitle] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectLink, setProjectLink] = useState("");
 
   useEffect(() => {
     getSubjects();
     setSubject(subjects.filter((subj) => subj._id === id)[0]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    getProjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -78,7 +94,37 @@ const SubjectPage = () => {
       </div>
       <div className="subject-right">
         <h2>Projects</h2>
-        <li>Python katas: https://github.com/emilyDZC/python-katas</li>
+        <button
+          className="btn"
+          onClick={() => setShowAddProject((current) => !current)}
+        >
+          {showAddProject ? "Cancel" : <AddButton text="Add New Project" />}
+        </button>
+        {showAddProject && (
+          <AddProject
+            setProjectTitle={setProjectTitle}
+            setProjectDescription={setProjectDescription}
+            setProjectLink={setProjectLink}
+            projectLink={projectLink}
+            projectTitle={projectTitle}
+            projectDescription={projectDescription}
+            setShowAddProject={setShowAddProject}
+            subject={name}
+          />
+        )}
+        {projects.filter((proj) => proj.subject === id).length > 0 &&
+          projects
+            .filter((proj) => proj.subject === id)
+            .map((proj, i) => {
+              return (
+                <div key={i}>
+                  <a href={proj.link}>
+                    <h3>{proj.title}</h3>
+                    <p>{proj.description}</p>
+                  </a>
+                </div>
+              );
+            })}
       </div>
     </div>
   );
