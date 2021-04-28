@@ -5,6 +5,7 @@ import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
 import Title from "./components/Title";
 import AddSubject from "./components/AddSubject";
+import { colours } from "../../utils/colours";
 
 const Dashboard = () => {
   const { subjects, getSubjects, addSubject } = useContext(GlobalContext);
@@ -16,17 +17,6 @@ const Dashboard = () => {
     getSubjects();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const colours = [
-    "#00AFB9", // turquoise (verdigris)
-    "#FDFCDC", // light yellow
-    "#2896b8", // cgblue
-    "#D0F4DE", // aero blue (pastel green)
-    "#6D9DC5", // cerulean forest
-    "#B6A6CA", // lilac
-    "#A9DEF9", // uranian blue
-    "#D5CFE1", // languid lavender
-  ];
 
   const handleAddSubject = () => {
     const newSubject = {
