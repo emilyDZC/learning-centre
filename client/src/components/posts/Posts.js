@@ -11,24 +11,29 @@ const Posts = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const subjectPosts = posts.filter((post) => post.subject === props.id);
+
   return (
     <div className="posts-container">
-      {posts &&
-        posts
-          .filter((post) => post.subject === props.id)
-          .map((post, i) => {
-            return (
-              <Post
-                title={post.title}
-                body={post.body}
-                date={moment(post.createdAt).format("Do MMMM YYYY, h:mm a")}
-                tags={post.tags}
-                subject={post.subject}
-                id={post._id}
-                key={i}
-              />
-            );
-          })}
+      {subjectPosts.length === 0 && (
+        <div>
+          <em>Nothing here yet!</em>
+        </div>
+      )}
+      {subjectPosts.length > 0 &&
+        subjectPosts.map((post, i) => {
+          return (
+            <Post
+              title={post.title}
+              body={post.body}
+              date={moment(post.createdAt).format("Do MMMM YYYY, h:mm a")}
+              tags={post.tags}
+              subject={post.subject}
+              id={post._id}
+              key={i}
+            />
+          );
+        })}
     </div>
   );
 };

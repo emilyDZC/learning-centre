@@ -22,13 +22,18 @@ const SubjectPage = () => {
     getProjects,
   } = useContext(GlobalContext);
   const [subject, setSubject] = useState();
-  const [keyword, setKeyword] = useState();
+  const [keyword, setKeyword] = useState("");
+  const [keywordDescription, setKeywordDescription] = useState("");
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectLink, setProjectLink] = useState("");
 
   useEffect(() => {
     getSubjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setSubject(subjects.filter((subj) => subj._id === id)[0]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -39,12 +44,16 @@ const SubjectPage = () => {
   }, []);
 
   const onSubmit = () => {
+    if (keyword === "" || keywordDescription === "") return;
+    let keywordPair = keyword + ":" + keywordDescription;
     const updatedSubject = {
       id: subject._id,
-      keywords: [...subject.keywords, keyword],
+      keywords: [...subject.keywords, keywordPair],
     };
 
     updateSubject(updatedSubject);
+    setKeyword("");
+    setKeywordDescription("");
   };
 
   return (
@@ -52,10 +61,11 @@ const SubjectPage = () => {
       <div className="subject-left">
         <h2>Keywords</h2>
         <div className="keyword-input">
+          <FormInput title="" placeholder="Keyword" func={setKeyword} />
           <FormInput
             title=""
-            placeholder="Add new keyword..."
-            func={setKeyword}
+            placeholder="Description"
+            func={setKeywordDescription}
           />
           <FontAwesomeIcon
             icon={faCheck}
@@ -63,8 +73,9 @@ const SubjectPage = () => {
             onClick={() => onSubmit()}
           />
         </div>
-        {subject &&
-          subject.keywords.length > 0 &&
+        {subject !== undefined &&
+          subject.keywords &&
+          subject.keywords[0] !== null &&
           subject.keywords.map((keyword, i) => {
             return (
               <li>

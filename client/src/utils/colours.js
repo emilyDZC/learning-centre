@@ -7,4 +7,8 @@ export const colours = [
   "#B6A6CA", // lilac
   "#A9DEF9", // uranian blue
   "#D5CFE1", // languid lavender
+  "#D4E4BC", // green
+  "#D9B8C4", // queen pink
+  "#ABD1B5", // turquoise green
+  "#79B791", // dark sea green
 ];
