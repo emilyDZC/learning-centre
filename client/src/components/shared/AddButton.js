@@ -4,7 +4,7 @@ import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const AddButton = ({ text }) => {
   return (
-    <div className>
+    <div>
       <FontAwesomeIcon icon={faPencilAlt} /> {text}
     </div>
   );

@@ -52,7 +52,7 @@ const Dashboard = () => {
                 key={i}
                 name={subj.name}
                 id={subj._id}
-                colour={colours[i]}
+                colour={colours[i] ? colours[i] : colours[0]}
               />
             );
           })}

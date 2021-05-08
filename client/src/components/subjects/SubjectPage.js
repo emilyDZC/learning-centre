@@ -21,7 +21,6 @@ const SubjectPage = () => {
     projects,
     getProjects,
   } = useContext(GlobalContext);
-  const [subject, setSubject] = useState();
   const [keyword, setKeyword] = useState("");
   const [keywordDescription, setKeywordDescription] = useState("");
   const [projectTitle, setProjectTitle] = useState("");
@@ -33,10 +32,8 @@ const SubjectPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    setSubject(subjects.filter((subj) => subj._id === id)[0]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const currentSubject = subjects.filter((subj) => subj._id === id)[0];
+  const [subject, setSubject] = useState(currentSubject);
 
   useEffect(() => {
     getProjects();
@@ -46,9 +43,16 @@ const SubjectPage = () => {
   const onSubmit = () => {
     if (keyword === "" || keywordDescription === "") return;
     let keywordPair = keyword + ":" + keywordDescription;
+    let keywords = [];
+    if (subject.keywords) {
+      subject.keywords.push(keywordPair);
+      keywords = subject.keywords;
+    } else {
+      keywords = [keywordPair];
+    }
     const updatedSubject = {
-      id: subject._id,
-      keywords: [...subject.keywords, keywordPair],
+      id,
+      keywords,
     };
 
     updateSubject(updatedSubject);
@@ -74,11 +78,10 @@ const SubjectPage = () => {
           />
         </div>
         {subject !== undefined &&
-          subject.keywords &&
-          subject.keywords[0] !== null &&
+          subject.keywords.length > 0 &&
           subject.keywords.map((keyword, i) => {
             return (
-              <li>
+              <li key={i}>
                 <strong>{keyword.split(":")[0]}:</strong>{" "}
                 {keyword.split(":")[1]}
               </li>
