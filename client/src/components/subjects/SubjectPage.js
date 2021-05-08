@@ -13,6 +13,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 const SubjectPage = () => {
   const { id, name } = useParams();
   const [showAddPost, setShowAddPost] = useState(false);
+  const [showAddSummary, setShowAddSummary] = useState(false);
   const [showAddProject, setShowAddProject] = useState(false);
   const {
     subjects,
@@ -26,6 +27,7 @@ const SubjectPage = () => {
   const [projectTitle, setProjectTitle] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
   const [projectLink, setProjectLink] = useState("");
+  const [summary, setSummary] = useState("");
 
   useEffect(() => {
     getSubjects();
@@ -60,6 +62,17 @@ const SubjectPage = () => {
     setKeywordDescription("");
   };
 
+  const submitSummary = () => {
+    const updatedSubject = {
+      id,
+      summary,
+    };
+
+    updateSubject(updatedSubject);
+    setSummary("");
+    setShowAddSummary(false);
+  };
+
   return (
     <div className="subject-page">
       <div className="subject-left">
@@ -91,6 +104,28 @@ const SubjectPage = () => {
       <div className="subject-middle">
         <Link to="/">Back</Link>
         <h1>{name}</h1>
+        {subject !== undefined && !subject.summary && (
+          <p
+            className="link-text"
+            onClick={() => setShowAddSummary((current) => !current)}
+          >
+            {showAddSummary ? "Cancel" : "Add summary"}
+          </p>
+        )}
+        {showAddSummary && (
+          <div className="summary-input">
+            <FormInput
+              title=""
+              placeholder="Add subject summary"
+              func={setSummary}
+            />
+            <FontAwesomeIcon
+              icon={faCheck}
+              className="check-icon"
+              onClick={() => submitSummary()}
+            />
+          </div>
+        )}
         <div>{subject && subject.summary && subject.summary}</div>
         <div className="notes-container-box">
           <h2>My {name} Notes</h2>
