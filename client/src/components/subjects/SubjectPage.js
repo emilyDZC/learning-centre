@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import Posts from "../posts/Posts";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AddPost from "../posts/components/AddPost";
 import AddButton from "../shared/AddButton";
@@ -9,8 +9,13 @@ import { GlobalContext } from "../../context/GlobalState";
 import FormInput from "../shared/FormInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { duoColours } from "../../utils/colours";
 
 const SubjectPage = () => {
+  const location = useLocation();
+  const colour = location.state.colour;
+  const pageColours = [duoColours[colour], colour];
+
   const { id, name } = useParams();
   const [showAddPost, setShowAddPost] = useState(false);
   const [showAddSummary, setShowAddSummary] = useState(false);
@@ -75,7 +80,7 @@ const SubjectPage = () => {
 
   return (
     <div className="subject-page">
-      <div className="subject-left">
+      <div className="subject-left" style={{ backgroundColor: pageColours[0] }}>
         <h2>Keywords</h2>
         <div className="keyword-input">
           <FormInput title="" placeholder="Keyword" func={setKeyword} />
@@ -141,7 +146,10 @@ const SubjectPage = () => {
           <Posts id={id} />
         </div>
       </div>
-      <div className="subject-right">
+      <div
+        className="subject-right"
+        style={{ backgroundColor: pageColours[1] }}
+      >
         <h2>Projects</h2>
         <button
           className="btn"
